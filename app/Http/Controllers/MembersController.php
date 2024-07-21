@@ -13,4 +13,31 @@ class MembersController extends Controller
 
         return view("members.index", compact("members"));
     }
-}
+
+    public function create() 
+    {
+        return view("members.create");
+    }
+
+    public function store(Request $request)
+    {
+
+    }
+
+    public function edit($id)
+    {
+        return view("members.edit");
+    }
+
+    public function update(Request $request, $id)
+    {
+
+    }
+
+    public function destroy($id)
+    {
+
+    }
+ }
+
+
