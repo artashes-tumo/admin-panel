@@ -5,14 +5,20 @@
     .delete-button {
         margin-left: 10px;
     }
+
+    .table-actions {
+        display: flex;
+    }
 </style>
 @endsection
 
 @section('content')
 <div class="container">
-    <div class="button-content">
-        <a href="{{route('member_create')}}" class="btn btn-sm btn-primary">Add Member</a>
-    </div>
+    @if (Auth::user()->role != 'writer')
+        <div class="button-content">
+            <a href="{{route('member_create')}}" class="btn btn-sm btn-primary">Add Member</a>
+        </div>
+    @endif
     <table id="members_list_table" class="display">
         <thead>
             <tr>
@@ -25,7 +31,9 @@
                 <th>Job Title</th>
                 <th>Salary</th>
                 <th>Joined At</th>
-                <th>Actions</th>
+                @if (Auth::user()->role != 'writer')
+                    <th>Actions</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -38,12 +46,27 @@
                     <td>{{ $member->gender }}</td>
                     <td>{{ $member->age }}</td>
                     <td>{{ $member->position }}</td>
-                    <td>{{ $member->sallary }}</td>
+                    <td>{{ $member->salary }}</td>
                     <td>{{ Carbon\Carbon::parse($member->joined_at)->format('d-m-Y') }}</td>
-                    <td>
-                        <a class="btn btn-sm btn-primary" href="{{route('member_edit', ['id'=>$member->id])}}">Edit</a>
-                        <a class="btn btn-sm btn-danger delete-button" href="">Delete</a>
-                    </td>
+
+                    @if (Auth::user()->role != 'writer')
+                        <td class="table-actions">
+                            <a class="btn btn-sm btn-primary" href="{{route('member_edit', ['id' => $member->id])}}">Edit</a>
+
+                            @if (Auth::user()->role == 'super-admin')
+                                <form action="{{route('member_delete', ['id' => $member->id])}}" method="post">
+                                    <!-- Approving -->
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+
+                                    <!-- Method->Post -->
+                                    <input type="hidden" name="_method" value="DELETE">
+
+                                    <!-- Submit -->
+                                    <input value="Delete" type="submit" class="btn btn-sm btn-danger delete-button" id="">
+                                </form>
+                            @endif
+                        </td>
+                    @endif
                 </tr>
             @endforeach
         </tbody>
@@ -54,4 +77,5 @@
         $('#members_list_table').DataTable({});
     })
 </script>
+
 @endsection
