@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-
-
 @section('content')
 <div class="container">
     @if ($errors->any())
@@ -15,91 +13,111 @@
     @endif
 
     <form action="{{route('member_store')}}" method="POST">
-        <!-- Approving -->
-        <input type="hidden" name="_token" value="{{csrf_token()}}">
+        <!-- CSRF Token -->
+        @csrf
 
         <!-- Email -->
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input name="email" type="email" class="form-control" id="email" placeholder="Enter email">
+        </div>
 
-        <div class="row">
+        <!-- First and Last Names -->
+        <div class="mb-3 row">
             <div class="col">
-                <input name="email" type="email" class="form-control" placeholder="His/Her email">
+                <label for="first_name" class="form-label">First Name</label>
+                <input name="first_name" type="text" class="form-control" id="first_name" placeholder="Enter first name">
+            </div>
+            <div class="col">
+                <label for="last_name" class="form-label">Last Name</label>
+                <input name="last_name" type="text" class="form-control" id="last_name" placeholder="Enter last name">
             </div>
         </div>
 
-        <br>
-
-        <!-- First, last names -->
-        <div class="row">
-            <!-- First name -->
+        <!-- Image and Position -->
+        <div class="mb-3 row">
             <div class="col">
-                <input name="first_name" type="text" class="form-control" placeholder="His/Her First name">
+                <label for="image" class="form-label">Image Link</label>
+                <input name="image" type="text" class="form-control" id="image" placeholder="Enter image URL">
             </div>
-
-            <!-- Last name -->
             <div class="col">
-                <input name="last_name" type="text" class="form-control" placeholder="His/Her Last name">
+                <label for="position" class="form-label">Position</label>
+                <input name="position" type="text" class="form-control" id="position" placeholder="Enter position">
             </div>
         </div>
 
-        <br>
-
-        <!-- Image, position -->
-        <div class="row">
-            <!-- Image -->
+        <!-- Age and Salary -->
+        <div class="mb-3 row">
             <div class="col">
-                <input name="image" type="text" class="form-control" placeholder="His/Her Image link">
+                <label for="age" class="form-label">Age</label>
+                <input name="age" type="number" class="form-control" id="age" placeholder="Enter age">
             </div>
-
-            <!-- Position -->
             <div class="col">
-                <input name="position" type="text" class="form-control" placeholder="His/Her position">
+                <label for="salary" class="form-label">Salary</label>
+                <input name="salary" type="number" class="form-control" id="salary" placeholder="Enter salary">
             </div>
         </div>
 
-        <br>
-
-        <!-- Age, salary -->
-        <div class="row">
-            <!-- Age -->
+        <!-- Gender and Joined At -->
+        <div class="mb-3 row">
             <div class="col">
-                <input name="age" type="number" class="form-control" placeholder="His/Her age">
-            </div>
-
-            <!-- Salary -->
-            <div class="col">
-                <input name="salary" type="number" class="form-control" placeholder="His/Her salary">
-            </div>
-        </div>
-
-        <br>
-
-        <!-- Gender, joined at -->
-        <div class="row">
-            <div class="col">
-                <!-- Gender -->
-                <label type="box" style="margin-right: 10px;">His/Her gender:</label>
-                <select name="gender">
-                    <option value="">Select gender↓</option>
+                <label for="gender" class="form-label">Gender</label>
+                <select name="gender" id="gender" class="form-select">
+                    <option value="">Select gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
             </div>
             <div class="col">
-                <!-- Joined at -->
-                <label type="box">He/She joined at:</label>
-                <input name="joined_at" type="date" class="form-control" placeholder="He/She joined at:">
+                <label for="joined_at" class="form-label">Joined At</label>
+                <input name="joined_at" type="date" class="form-control" id="joined_at">
             </div>
         </div>
 
-        <!-- Submit, Back -->
-        <div class="row">
-            <div class="col">
-                <!-- Back -->
-                <a style="margin-right: 10px;" href="{{route('member_index')}}" class="btn btn-sm btn-primary">Back</a>
-                <!-- Submit -->
-                <input type="submit" class="btn btn-sm btn-success" value="Add Member">
-            </div>
+        <!-- Submit and Back Buttons -->
+        <div class="d-flex justify-content-between">
+            <a href="{{route('member_index')}}" class="btn btn-secondary">Back</a>
+            <input type="submit" class="btn btn-success" value="Add Member">
         </div>
     </form>
 </div>
+@endsection
+
+@section('head')
+<style>
+    .container {
+        background-color: #fefefe; /* Soft white background for warmth */
+        border-radius: 15px; /* Rounded corners for a friendly feel */
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    }
+
+    .form-label {
+        color: #5a9bd4; /* Soft blue for a calming effect */
+    }
+
+    .form-control,
+    .form-select {
+        border-radius: 10px; /* Rounded corners for inputs */
+        border: 1px solid #ddd; /* Light border for a soft look */
+    }
+
+    .btn-success {
+        background-color: #5a9bd4; /* Heartstopper-inspired color for the submit button */
+        border: none;
+    }
+
+    .btn-success:hover {
+        background-color: #4a8ac3;
+    }
+
+    .btn-secondary {
+        background-color: #d0e0f0; /* Light blue for the back button */
+        border: none;
+    }
+
+    .btn-secondary:hover {
+        background-color: #b0c0e0;
+    }
+</style>
 @endsection

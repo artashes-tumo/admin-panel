@@ -1,5 +1,59 @@
 @extends('layouts.app')
 
+@section('head')
+<style>
+    /* Heartstopper-themed styling */
+    .container {
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        background: linear-gradient(135deg, #d0e0f0, #e0f7fa);
+        /* Light gradient background */
+        padding: 30px;
+        border-radius: 15px;
+    }
+
+    .card {
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background: linear-gradient(135deg, #ff5c5c, #ff8585);
+        /* Gradient background for the header */
+        color: white;
+        font-weight: bold;
+        border-radius: 15px 15px 0 0;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #5a9bd4, #82b3e0);
+        /* Gradient background for primary buttons */
+        border: none;
+        color: white;
+        font-weight: bold;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #4a8ac3, #699fcf);
+    }
+
+    .form-control {
+        border-radius: 10px;
+    }
+
+    .invalid-feedback {
+        color: #ff5c5c;
+        font-weight: bold;
+    }
+
+    .col-form-label {
+        color: #333;
+        font-weight: bold;
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
